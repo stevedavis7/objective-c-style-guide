@@ -1,18 +1,15 @@
-# The official raywenderlich.com Objective-C style guide.
+# The official Catapult Sports Objective-C style guide for Vision
 
-This style guide outlines the coding conventions for raywenderlich.com.
+This style guide outlines the coding conventions for Catapult Sports Vision, based on raywenderlich.com.
 
 ## Introduction
 
-The reason we made this style guide was so that we could keep the code in our books, tutorials, and starter kits nice and consistent - even though we have many different authors working on the books.
+The reason we made this style guide was so that we could keep the code nice and consistent - even though we have many different developers working on the project.
 
-This style guide is different from other Objective-C style guides you may see, because the focus is centered on readability for print and the web. Many of the decisions were made with an eye toward conserving space for print, easy legibility, and tutorial writing.
 
 ## Credits
 
-The creation of this style guide was a collaborative effort from various raywenderlich.com team members under the direction of Nicholas Waynik.  The team includes: [Soheil Moayedi Azarpour](https://github.com/moayes), [Ricardo Rendon Cepeda](https://github.com/ricardo-rendoncepeda), [Tony Dahbura](https://github.com/tdahbura), [Colin Eberhardt](https://github.com/ColinEberhardt), [Matt Galloway](https://github.com/mattjgalloway), [Greg Heo](https://github.com/gregheo), [Matthijs Hollemans](https://github.com/hollance), [Christopher LaPollo](https://github.com/elephantronic), [Saul Mora](https://github.com/casademora), [Andy Pereira](https://github.com/macandyp), [Mic Pringle](https://github.com/micpringle), [Pietro Rea](https://github.com/pietrorea), [Cesare Rocchi](https://github.com/funkyboy), [Marin Todorov](https://github.com/icanzilb), [Nicholas Waynik](https://github.com/ndubbs), and [Ray Wenderlich](https://github.com/raywenderlich)
-
-We would like to thank the creators of the [New York Times](https://github.com/NYTimes/objective-c-style-guide) and [Robots & Pencils'](https://github.com/RobotsAndPencils/objective-c-style-guide) Objective-C Style Guides.  These two style guides provided a solid starting point for this guide to be created and based upon.
+Created by Steve Davis with minor changes to the raywenderlich.com style guide
 
 ## Background
 
@@ -116,25 +113,26 @@ Use `#pragma mark -` to categorize methods in functional groupings and protocol/
 ## Spacing
 
 * Indent using 2 spaces (this conserves space in print and makes line wrapping less likely). Never indent with tabs. Be sure to set this preference in Xcode.
-* Method braces and other braces (`if`/`else`/`switch`/`while` etc.) always open on the same line as the statement but close on a new line.
+* Method braces and other braces (`if`/`else`/`switch`/`while` etc.) always open on the next line after the statement and close on a new line.
 
 **Preferred:**
 ```objc
-if (user.isHappy) {
+if (user.isHappy)
+{
   //Do something
-} else {
+}
+else 
+{
   //Do something else
 }
 ```
 
 **Not Preferred:**
 ```objc
-if (user.isHappy)
-{
-    //Do something
-}
-else {
-    //Do something else
+if (user.isHappy) {
+  //Do something
+} else {
+  //Do something else
 }
 ```
 
@@ -190,14 +188,14 @@ UIButton *settingsButton;
 UIButton *setBut;
 ```
 
-A three letter prefix should always be used for class names and constants, however may be omitted for Core Data entity names. For any official raywenderlich.com books, starter kits, or tutorials, the prefix 'RWT' should be used.
+A three letter prefix should always be used for class names and constants, however may be omitted for Core Data entity names.  CSI (Catapult Sports Interface) is the prefix to use for Vision.
 
 Constants should be camel-case with all words capitalized and prefixed by the related class name for clarity.
 
 **Preferred:**
 
 ```objc
-static NSTimeInterval const RWTTutorialViewControllerNavigationFadeAnimationDuration = 0.3;
+static NSTimeInterval const CSITutorialViewControllerNavigationFadeAnimationDuration = 0.3;
 ```
 
 **Not Preferred:**
@@ -234,9 +232,11 @@ In method signatures, there should be a space after the method type (-/+ symbol)
 
 The usage of the word "and" is reserved.  It should not be used for multiple parameters as illustrated in the `initWithWidth:height:` example below.
 
+Note: In method signatures there is no space between return or argument type and the pointer symbol
+
 **Preferred:**
 ```objc
-- (void)setExampleText:(NSString *)text image:(UIImage *)image;
+- (void)setExampleText:(NSString*)text image:(UIImage*)image;
 - (void)sendAction:(SEL)aSelector to:(id)anObject forAllCells:(BOOL)flag;
 - (id)viewWithTag:(NSInteger)tag;
 - (instancetype)initWithWidth:(CGFloat)width height:(CGFloat)height;
@@ -265,7 +265,7 @@ Direct access to instance variables that 'back' properties should be avoided exc
 **Preferred:**
 
 ```objc
-@interface RWTTutorial : NSObject
+@interface CSIItem : NSObject
 
 @property (strong, nonatomic) NSString *tutorialName;
 
@@ -275,7 +275,8 @@ Direct access to instance variables that 'back' properties should be avoided exc
 **Not Preferred:**
 
 ```objc
-@interface RWTTutorial : NSObject {
+@interface CSIItem : NSObject 
+{
   NSString *tutorialName;
 }
 ```
@@ -383,7 +384,8 @@ When using `enum`s, it is recommended to use the new fixed underlying type speci
 **For Example:**
 
 ```objc
-typedef NS_ENUM(NSInteger, RWTLeftMenuTopItemType) {
+typedef NS_ENUM(NSInteger, RWTLeftMenuTopItemType) 
+{
   RWTLeftMenuTopItemMain,
   RWTLeftMenuTopItemShows,
   RWTLeftMenuTopItemSchedule
@@ -393,7 +395,8 @@ typedef NS_ENUM(NSInteger, RWTLeftMenuTopItemType) {
 You can also make explicit value assignments (showing older k-style constant definition):
 
 ```objc
-typedef NS_ENUM(NSInteger, RWTGlobalConstants) {
+typedef NS_ENUM(NSInteger, RWTGlobalConstants) 
+{
   RWTPinSizeMin = 1,
   RWTPinSizeMax = 5,
   RWTPinCountMin = 100,
@@ -406,7 +409,8 @@ Older k-style constant definitions should be **avoided** unless writing CoreFoun
 **Not Preferred:**
 
 ```objc
-enum GlobalConstants {
+enum GlobalConstants 
+{
   kMaxPinSize = 5,
   kMaxPinCount = 500,
 };
@@ -419,11 +423,13 @@ Braces are not required for case statements, unless enforced by the complier.
 When a case contains more than one line, braces should be added.
 
 ```objc
-switch (condition) {
+switch (condition) 
+{
   case 1:
     // ...
     break;
-  case 2: {
+  case 2: 
+  {
     // ...
     // Multi-line example using braces
     break;
@@ -441,7 +447,8 @@ switch (condition) {
 There are times when the same code can be used for multiple cases, and a fall-through should be used.  A fall-through is the removal of the 'break' statement for a case thus allowing the flow of execution to pass to the next case value.  A fall-through should be commented for coding clarity.
 
 ```objc
-switch (condition) {
+switch (condition) 
+{
   case 1:
     // ** fall-through! **
   case 2:
@@ -459,7 +466,8 @@ When using an enumerated type for a switch, 'default' is not needed.   For examp
 ```objc
 RWTLeftMenuTopItemType menuType = RWTLeftMenuTopItemMain;
 
-switch (menuType) {
+switch (menuType) 
+{
   case RWTLeftMenuTopItemMain:
     // ...
     break;
@@ -524,7 +532,8 @@ Conditional bodies should always use braces even when a conditional body could b
 
 **Preferred:**
 ```objc
-if (!error) {
+if (!error) 
+{
   return success;
 }
 ```
@@ -566,9 +575,11 @@ result = a > b ? x = c > d ? c : d : y;
 Init methods should follow the convention provided by Apple's generated code template.  A return type of 'instancetype' should also be used instead of 'id'.
 
 ```objc
-- (instancetype)init {
+- (instancetype)init 
+{
   self = [super init];
-  if (self) {
+  if (self) 
+  {
     // ...
   }
   return self;
@@ -626,8 +637,10 @@ When coding with conditionals, the left hand margin of the code should be the "g
 **Preferred:**
 
 ```objc
-- (void)someMethod {
-  if (![someOther boolValue]) {
+- (void)someMethod 
+{
+  if (![someOther boolValue]) 
+  {
 	return;
   }
 
@@ -638,8 +651,10 @@ When coding with conditionals, the left hand margin of the code should be the "g
 **Not Preferred:**
 
 ```objc
-- (void)someMethod {
-  if ([someOther boolValue]) {
+- (void)someMethod 
+{
+  if ([someOther boolValue]) 
+  {
     //Do something important
   }
 }
@@ -652,7 +667,8 @@ When methods return an error parameter by reference, switch on the returned valu
 **Preferred:**
 ```objc
 NSError *error;
-if (![self trySomethingWithError:&error]) {
+if (![self trySomethingWithError:&error]) 
+{
   // Handle Error
 }
 ```
@@ -661,7 +677,8 @@ if (![self trySomethingWithError:&error]) {
 ```objc
 NSError *error;
 [self trySomethingWithError:&error];
-if (error) {
+if (error) 
+{
   // Handle Error
 }
 ```
@@ -673,7 +690,8 @@ Some of Apple’s APIs write garbage values to the error parameter (if non-NULL)
 
 Singleton objects should use a thread-safe pattern for creating their shared instance.
 ```objc
-+ (instancetype)sharedInstance {
++ (instancetype)sharedInstance 
+{
   static id sharedInstance = nil;
 
   static dispatch_once_t onceToken;
