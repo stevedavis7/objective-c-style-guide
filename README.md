@@ -103,11 +103,11 @@ Use `#pragma mark -` to categorize methods in functional groupings and protocol/
 
 #pragma mark - NSCopying
 
-- (id)copyWithZone:(NSZone *)zone {}
+- (id)copyWithZone:(NSZone*)zone {}
 
 #pragma mark - NSObject
 
-- (NSString *)description {}
+- (NSString*)description {}
 ```
 
 ## Spacing
@@ -119,20 +119,20 @@ Use `#pragma mark -` to categorize methods in functional groupings and protocol/
 ```objc
 if (user.isHappy)
 {
-  //Do something
+    //Do something
 }
 else 
 {
-  //Do something else
+    //Do something else
 }
 ```
 
 **Not Preferred:**
 ```objc
 if (user.isHappy) {
-  //Do something
+    //Do something
 } else {
-  //Do something else
+    //Do something else
 }
 ```
 
@@ -145,9 +145,9 @@ if (user.isHappy) {
 ```objc
 // blocks are easily readable
 [UIView animateWithDuration:1.0 animations:^{
-  // something
+    // something
 } completion:^(BOOL finished) {
-  // something
+    // something
 }];
 ```
 
@@ -277,7 +277,7 @@ Direct access to instance variables that 'back' properties should be avoided exc
 ```objc
 @interface CSIItem : NSObject 
 {
-  NSString *tutorialName;
+    NSString *tutorialName;
 }
 ```
 
@@ -386,9 +386,9 @@ When using `enum`s, it is recommended to use the new fixed underlying type speci
 ```objc
 typedef NS_ENUM(NSInteger, CSILeftMenuTopItemType) 
 {
-  CSILeftMenuTopItemMain,
-  CSILeftMenuTopItemShows,
-  CSILeftMenuTopItemSchedule
+    CSILeftMenuTopItemMain,
+    CSILeftMenuTopItemShows,
+    CSILeftMenuTopItemSchedule
 };
 ```
 
@@ -397,10 +397,10 @@ You can also make explicit value assignments (showing older k-style constant def
 ```objc
 typedef NS_ENUM(NSInteger, CSIGlobalConstants) 
 {
-  CSIPinSizeMin = 1,
-  CSIPinSizeMax = 5,
-  CSIPinCountMin = 100,
-  CSIPinCountMax = 500,
+    CSIPinSizeMin = 1,
+    CSIPinSizeMax = 5,
+    CSIPinCountMin = 100,
+    CSIPinCountMax = 500,
 };
 ```
 
@@ -411,8 +411,8 @@ Older k-style constant definitions should be **avoided** unless writing CoreFoun
 ```objc
 enum GlobalConstants 
 {
-  kMaxPinSize = 5,
-  kMaxPinCount = 500,
+    kMaxPinSize = 5,
+    kMaxPinCount = 500,
 };
 ```
 
@@ -425,20 +425,20 @@ When a case contains more than one line, braces should be added.
 ```objc
 switch (condition) 
 {
-  case 1:
-    // ...
+    case 1:
+        // ...
     break;
-  case 2: 
-  {
-    // ...
-    // Multi-line example using braces
+    case 2: 
+    {
+        // ...
+        // Multi-line example using braces
     break;
-  }
-  case 3:
-    // ...
+    }
+    case 3:
+        // ...
     break;
-  default: 
-    // ...
+    default: 
+        // ...
     break;
 }
 
@@ -449,13 +449,13 @@ There are times when the same code can be used for multiple cases, and a fall-th
 ```objc
 switch (condition) 
 {
-  case 1:
-    // ** fall-through! **
-  case 2:
-    // code executed for values 1 and 2
+    case 1:
+        // ** fall-through! **
+    case 2:
+        // code executed for values 1 and 2
     break;
-  default: 
-    // ...
+    default: 
+        // ...
     break;
 }
 
@@ -534,14 +534,14 @@ Conditional bodies should always use braces even when a conditional body could b
 ```objc
 if (!error) 
 {
-  return success;
+    return success;
 }
 ```
 
 **Not Preferred:**
 ```objc
 if (!error)
-  return success;
+    return success;
 ```
 
 or
@@ -577,12 +577,12 @@ Init methods should follow the convention provided by Apple's generated code tem
 ```objc
 - (instancetype)init 
 {
-  self = [super init];
-  if (self) 
-  {
-    // ...
-  }
-  return self;
+    self = [super init];
+    if (self) 
+    {
+        // ...
+    }
+    return self;
 }
 ```
 
@@ -639,12 +639,12 @@ When coding with conditionals, the left hand margin of the code should be the "g
 ```objc
 - (void)someMethod 
 {
-  if (![someOther boolValue]) 
-  {
-	return;
-  }
+    if (![someOther boolValue]) 
+    {
+        return;
+    }
 
-  //Do something important
+    //Do something important
 }
 ```
 
@@ -653,10 +653,10 @@ When coding with conditionals, the left hand margin of the code should be the "g
 ```objc
 - (void)someMethod 
 {
-  if ([someOther boolValue]) 
-  {
-    //Do something important
-  }
+    if ([someOther boolValue]) 
+    {
+        //Do something important
+    }
 }
 ```
 
@@ -669,7 +669,7 @@ When methods return an error parameter by reference, switch on the returned valu
 NSError *error;
 if (![self trySomethingWithError:&error]) 
 {
-  // Handle Error
+    // Handle Error
 }
 ```
 
@@ -679,7 +679,7 @@ NSError *error;
 [self trySomethingWithError:&error];
 if (error) 
 {
-  // Handle Error
+    // Handle Error
 }
 ```
 
@@ -692,14 +692,14 @@ Singleton objects should use a thread-safe pattern for creating their shared ins
 ```objc
 + (instancetype)sharedInstance 
 {
-  static id sharedInstance = nil;
+    static id sharedInstance = nil;
 
-  static dispatch_once_t onceToken;
-  dispatch_once(&onceToken, ^{
-    sharedInstance = [[self alloc] init];
-  });
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[self alloc] init];
+    });
 
-  return sharedInstance;
+    return sharedInstance;
 }
 ```
 This will prevent [possible and sometimes prolific crashes](http://cocoasamurai.blogspot.com/2011/04/singletons-your-doing-them-wrong.html).
